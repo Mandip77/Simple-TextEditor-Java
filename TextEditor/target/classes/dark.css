@@ -1,0 +1,20 @@
+.root {
+    -fx-background: #1e1e1e;
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #dcdcdc;
+}
+.menu-bar { -fx-background-color: #2d2d2d; }
+.context-menu { -fx-background-color: #2d2d2d; }
+.menu, .menu-item, .label { -fx-text-fill: #dcdcdc; }
+
+.text-area {
+    -fx-background-color: #2d2d2d;
+    -fx-control-inner-background: #2d2d2d;
+    -fx-text-fill: #dcdcdc;
+    -fx-text-inner-color: #dcdcdc;
+}
+.text-area .content { -fx-background-color: #2d2d2d; }
+.scroll-pane, .scroll-pane .viewport {
+    -fx-background: #2d2d2d;
+    -fx-background-color: #2d2d2d;
+}

@@ -4,7 +4,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.bhcc.mandip.controller">
+            fx:controller="edu.bhcc.mandip.Controller">
 
     <top>
         <MenuBar>
