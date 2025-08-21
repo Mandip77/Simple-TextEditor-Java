@@ -1,35 +1,27 @@
 package edu.bhcc.mandip;
 
-/*
- *  Project#1
- *  Done by Mandip Amgain and Diwan Bhandari
- *  CSC-285-01
- *   
- */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-/**
- * JavaFX App
- */
-
 public class App extends Application {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javafx.application.Application#start(javafx.stage.Stage)
-     */
     @Override
-    public void start(Stage primaryStage) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("startpage.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("startpage.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
+
+        // Default to light theme
+        scene.getStylesheets().add(getClass().getResource("light.css").toExternalForm());
+
+        // Let controller know about stage+scene so it can toggle theme & manage window title
+        controller ctrl = loader.getController();
+        ctrl.init(primaryStage, scene);
+
+        primaryStage.setTitle("Simple Text Editor");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -37,5 +29,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
