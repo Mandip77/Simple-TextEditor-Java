@@ -8,7 +8,9 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Optional;
@@ -16,7 +18,7 @@ import java.util.logging.Logger;
 
 import static java.util.logging.Level.SEVERE;
 
-public class controller { // keep your name if you must, but prefer 'Controller'
+public class Controller {
     @FXML private MenuItem open;
     @FXML private MenuItem save;
     @FXML private MenuItem saveAs;
@@ -38,6 +40,11 @@ public class controller { // keep your name if you must, but prefer 'Controller'
             dirty = true;
             updateTitle();
         });
+
+        // Try to reflect current theme in the checkbox (optional)
+        boolean isDark = scene.getStylesheets().stream().anyMatch(s -> s.contains("dark.css"));
+        if (darkMode != null) darkMode.setSelected(isDark);
+
         updateTitle();
     }
 
@@ -101,9 +108,42 @@ public class controller { // keep your name if you must, but prefer 'Controller'
     // ===== Theme toggle =====
     @FXML
     void toggleDarkMode(ActionEvent e) {
-        scene.getStylesheets().clear();
-        String css = darkMode.isSelected() ? "dark.css" : "light.css";
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        applyTheme(darkMode != null && darkMode.isSelected());
+    }
+
+    private void applyTheme(boolean useDark) {
+        // Remove only previous theme sheets, not all styles
+        scene.getStylesheets().removeIf(s ->
+                s.endsWith("/dark.css") || s.endsWith("/light.css") ||
+                        s.contains("dark.css") || s.contains("light.css"));
+
+        final String cssName = useDark ? "dark.css" : "light.css";
+        URL url = findTheme(cssName);
+
+        System.out.println("[Theme] Requested: " + cssName + " -> " + url);
+
+        if (url == null) {
+            showError("Stylesheet not found: " + cssName +
+                    "\nLooked for: /edu/bhcc/mandip/" + cssName + " and /" + cssName +
+                    "\nEnsure the CSS is under src/main/resources.");
+            return; // Don't crash if missing
+        }
+
+        scene.getStylesheets().add(url.toExternalForm());
+    }
+
+    private URL findTheme(String cssName) {
+        // Try package path first, then classpath root
+        String[] candidates = {
+                "/edu/bhcc/mandip/" + cssName,
+                "/" + cssName
+        };
+        for (String c : candidates) {
+            URL u = App.class.getResource(c);
+            System.out.println("[Theme] Tried " + c + " -> " + u);
+            if (u != null) return u;
+        }
+        return null;
     }
 
     // ===== Helpers =====
