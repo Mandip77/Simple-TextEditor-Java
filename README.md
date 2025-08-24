@@ -115,26 +115,26 @@ ctrl.init(primaryStage, scene);
 
 Implements:
 
-Open/Save/Save As… using FileChooser
+- Open/Save/Save As… using FileChooser
 
-Dirty tracking by listening to TextArea text changes
+- Dirty tracking by listening to TextArea text changes
 
-Exit prompts via Alert (Yes / No / Cancel)
+- Exit prompts via Alert (Yes / No / Cancel)
 
-Dark Mode toggle swapping the stylesheet between light.css and dark.css
+- Dark Mode toggle swapping the stylesheet between light.css and dark.css
 (resilient path lookup; won’t crash if CSS is missing)
 
-Updates the window title to show * when there are unsaved edits.
+- Updates the window title to show * when there are unsaved edits.
 
-startpage.fxml
+**startpage.fxml**
 
-Declares the layout
+- Declares the layout
 
-Binds menu items to controller handlers (e.g., onAction="#openfile")
+- Binds menu items to controller handlers (e.g., onAction="#openfile")
 
-light.css / dark.css
+**light.css / dark.css**
 
-Proper JavaFX selectors for TextArea, menus, and scene background
+- Proper JavaFX selectors for TextArea, menus, and scene background
 
 Example dark theme:
 ```
