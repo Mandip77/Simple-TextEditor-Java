@@ -1,149 +1,109 @@
-# Simple Text Editor (JavaFX)
+<p align="center">
+  <img src="https://img.shields.io/badge/Simple%20Text%20Editor-JavaFX%20App-blueviolet?style=for-the-badge&logo=java&logoColor=white" alt="Simple Text Editor Banner"/>
+</p>
 
-A lightweight text editor built with **Java**, **JavaFX (FXML + CSS)**, and **Maven**.  
-It supports opening/saving `.txt` files, a dark/light theme toggle, and safe prompts to prevent losing unsaved work.
+<h1 align="center" style="font-family: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', monospace; font-size: 3rem; color: #3CC2F7; letter-spacing: 2px;">📝 Simple Text Editor</h1>
+<p align="center" style="font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif; color: #8383e2; font-size: 1.2rem;">
+  <b>A clean, modern JavaFX text editor with dark mode, keyboard shortcuts, and safety features.</b><br>
+  <i>by Mandip Amgain</i>
+</p>
 
-> Built by **Mandip Amgain** (CSC-285-01 Project #1)
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-11%2B-green?style=flat-square&logo=java">
+  <img src="https://img.shields.io/badge/JavaFX-19-blue?style=flat-square&logo=openjdk">
+  <img src="https://img.shields.io/badge/Maven-3.8%2B-yellow?style=flat-square&logo=apachemaven">
+</p>
+
+---
+
+## 🎬 Preview
+
+<!-- Replace the link below with your app demo video/GIF -->
+<p align="center">
+  <img src="YOUR_VIDEO_OR_GIF_LINK_HERE" alt="App Demo" width="600" style="border-radius: 16px; box-shadow: 0 8px 24px #0003; animation: fadeIn 1.2s;"/>
+</p>
 
 ---
 
 ## ✨ Features
 
-- **Open / Save / Save As…** for `.txt` files (UTF-8)
-- **Unsaved changes (“dirty”) tracking** with a leading `*` in the window title
-- **Exit protection**: prompts to save changes before exiting or opening another file
-- **Dark Mode toggle** (View → Dark Mode) using JavaFX CSS stylesheets
-- **Newline-preserving** file I/O (no collapsed lines)
-- **Keyboard shortcuts** (cross-platform)
-  - `Ctrl/Cmd + O` → Open
-  - `Ctrl/Cmd + S` → Save
-  - `Ctrl/Cmd + Shift + S` → Save As…
-  - `Ctrl/Cmd + Q` → Exit
+<div align="center">
 
-> Shortcuts are defined in FXML; adjust to taste in `startpage.fxml`.
+| 🌟 | Feature |
+|---|---------|
+| 💾 | Open, Save, Save As… for `.txt` files (UTF-8) |
+| 🟢 | Unsaved changes tracking with `*` in title |
+| ��️ | Exit protection (save prompts) |
+| 🌑 | Dark/Light Mode toggle |
+| 🔄 | Keyboard shortcuts (cross-platform) |
+| 📝 | Newline-preserving file I/O |
+| ⌨️ | Customizable shortcuts in FXML |
 
----
-
-## 🖼️ UI at a glance
-
-- **Menu Bar**  
-  - **File**: Open, Save, Save As…, Exit  
-  - **View**: Dark Mode (checkable)
-- **Editor**: A resizable `TextArea` (wrap enabled)
+</div>
 
 ---
 
-## 🧱 Tech Stack
+## 🖼️ UI Snapshots
 
-- **JDK**: 11+ (tested with JDK 21)
-- **JavaFX**: 19 (`javafx-controls`, `javafx-fxml`)
-- **Maven**: `javafx-maven-plugin` for local runs
+<details>
+  <summary>Show UI</summary>
+
+  <!-- Insert screenshots here if available -->
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/Mandip77/Simple-TextEditor-Java/main/screenshot-light.png" width="45%" alt="Light Mode" style="border-radius: 8px; box-shadow: 0 4px 18px #0002; margin: 0 12px; animation: slideIn 1.2s;"/>
+    <img src="https://raw.githubusercontent.com/Mandip77/Simple-TextEditor-Java/main/screenshot-dark.png" width="45%" alt="Dark Mode" style="border-radius: 8px; box-shadow: 0 4px 18px #0002; margin: 0 12px; animation: slideIn 1.2s;"/>
+  </p>
+</details>
 
 ---
 
-## 🚀 Getting Started
+## 🧑‍💻 Tech Stack
 
-### Prerequisites
-- JDK **11+** (recommend 17 or 21)
-- Maven **3.8+**
-
-## Verify:
-```
-java -version
-mvn -v
+```yaml
+Java           : 11+ (tested with 21)
+JavaFX         : 19 (controls, FXML)
+Maven          : javafx-maven-plugin
+Build Tooling  : Maven 3.8+
 ```
 
-## Clone
-```
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-```
-Run (dev)
-```
+---
+
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/Mandip77/Simple-TextEditor-Java.git
+cd Simple-TextEditor-Java
 mvn clean javafx:run
-
 ```
-## Build
 
-This project is intended to run via the Maven JavaFX plugin during development.
-If you want a standalone distribution, you can:
+Requires: Java 11+ & Maven 3.8+
 
-use jlink to create a runtime image with JavaFX modules, or
+---
 
-package and run with proper --module-path pointing to JavaFX libraries.
+## 🗂️ Project Structure
 
-(Ask if you want me to add a jlink profile—happy to wire it.)
-
-## 📁 Project Structure
+<details>
+  <summary>Expand for details</summary>
 
 ```
 src/
   main/
     java/
       edu/bhcc/mandip/
-        App.java            # JavaFX application entry point
-        Controller.java     # UI logic: open/save, theme, dirty state, exit prompts
+        App.java
+        Controller.java
     resources/
       edu/bhcc/mandip/
-        startpage.fxml      # UI layout (MenuBar + TextArea)
-        light.css           # Light theme
-        dark.css            # Dark theme
+        startpage.fxml
+        light.css
+        dark.css
 pom.xml
 ```
+</details>
 
-## 🔑 Key Files
-App.java
+---
 
-Loads startpage.fxml from the classpath
-
-Applies the light theme by default
-
-Passes Stage + Scene to the controller via Controller#init(...)
-
-Example snippet:
-```
-URL fxml = App.class.getResource("/edu/bhcc/mandip/startpage.fxml");
-FXMLLoader loader = new FXMLLoader(fxml);
-Parent root = loader.load();
-Scene scene = new Scene(root);
-scene.getStylesheets().add(App.class.getResource("/edu/bhcc/mandip/light.css").toExternalForm());
-Controller ctrl = loader.getController();
-ctrl.init(primaryStage, scene);
-
-``` 
-**Controller.java**
-
-Implements:
-
-- Open/Save/Save As… using FileChooser
-
-- Dirty tracking by listening to TextArea text changes
-
-- Exit prompts via Alert (Yes / No / Cancel)
-
-- Dark Mode toggle swapping the stylesheet between light.css and dark.css
-(resilient path lookup; won’t crash if CSS is missing)
-
-- Updates the window title to show * when there are unsaved edits.
-
-**startpage.fxml**
-
-- Declares the layout
-
-- Binds menu items to controller handlers (e.g., onAction="#openfile")
-
-**light.css / dark.css**
-
-- Proper JavaFX selectors for TextArea, menus, and scene background
-
-Example dark theme:
-```
-.root { -fx-background-color: #1e1e1e; -fx-text-fill: #dcdcdc; }
-.menu-bar { -fx-background-color: #2d2d2d; }
-.text-area { -fx-control-inner-background: #2d2d2d; -fx-text-inner-color: #dcdcdc; }
-.text-area .content { -fx-background-color: #2d2d2d; }
-```
-## 🎹 Shortcuts (default)
+## 🎹 Keyboard Shortcuts
 
 | Action   | Windows/Linux    | macOS           |
 | -------- | ---------------- | --------------- |
@@ -152,59 +112,47 @@ Example dark theme:
 | Save As… | Ctrl + Shift + S | Cmd + Shift + S |
 | Exit     | Ctrl + Q         | Cmd + Q         |
 
-Configured in FXML (accelerator="Shortcut+O", etc.). “Shortcut” maps to Ctrl on Windows/Linux and Cmd on macOS.
+---
 
-## 🧰 Troubleshooting
-**“Location is not set” / FXML not found**
+## 🛠️ Troubleshooting
 
-- Ensure startpage.fxml lives under:
-```
-src/main/resources/edu/bhcc/mandip/startpage.fxml
+<details>
+  <summary>Expand for common issues</summary>
 
+- FXML/CSS not found? Ensure `startpage.fxml`, `light.css`, and `dark.css` are in `src/main/resources/edu/bhcc/mandip/`.
+- Dark mode toggle not working? Confirm CSS files exist as above.
+- macOS "Timeout" warnings: benign; ignore.
+</details>
 
-```
-- After building, it should exist at:
+---
 
-```
-target/classes/edu/bhcc/mandip/startpage.fxml
-
-```
-- Dark Mode toggle does nothing or crashes
-
-- Confirm light.css and dark.css are in resources (same package path as FXML), e.g.:
-```
-src/main/resources/edu/bhcc/mandip/dark.css
-src/main/resources/edu/bhcc/mandip/light.css
-
-```
-- The controller tries both /edu/bhcc/mandip/<css> and /<css> and logs what it tried.
-
-**macOS: “Timeout while waiting for app reactivation”88**
-
-- This Glass warning is benign and unrelated to FXML/CSS issues.
-
-## 🗺️ Roadmap (nice next features)
+## 🗺️ Roadmap
 
 - Status bar (line/column, chars/words)
-
-- Find / Replace (Ctrl/Cmd + F / H)
-
-- Recent Files menu (persisted via Preferences)
-
-- Zoom (Ctrl/Cmd + + / -)
-
+- Find / Replace
+- Recent Files menu
+- Zoom in/out
 - Autosave & restore
+
+---
 
 ## 🤝 Contributing
 
-- PRs and suggestions welcome:
+PRs and suggestions welcome!  
+Fork, branch, and open a PR with description and screenshots/GIFs if UI changes.
 
-- Fork the repo
-
-- Create a feature branch
-
-Open a PR with a clear description and screenshots/GIFs if UI changes
+---
 
 ## 📄 License
 
-Choose a license (e.g., MIT) and add a LICENSE file at the repo root.
+MIT (proposed). Please add a LICENSE file.
+
+---
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=36BCF7&center=true&vCenter=true&width=400&lines=Happy+Editing!+%F0%9F%91%8B" alt="Animated typing effect"/>
+</p>
+
+<!--
+Advanced effects/modern fonts are referenced with inline style tags, but GitHub-flavored Markdown only partially supports these. For the boldest look, consider using custom shields, SVGs, and animated GIFs as shown, and keep screenshots and video up-to-date for maximum visual punch!
+-->
